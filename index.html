@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News 24x7 | Latest Breaking News</title>
+  <style>
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #d32f2f;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 25px;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    header h1 {font-size: 24px; letter-spacing: 1px;}
+    nav {display: flex; align-items: center; flex-wrap: wrap; gap: 10px;}
+    nav a {
+      color: white; text-decoration: none; margin: 0 8px; font-weight: bold;
+    }
+    nav a:hover {text-decoration: underline;}
+    .toggle-btn {
+      background: none; border: none; color: white;
+      font-size: 22px; cursor: pointer; margin-left: 5px;
+    }
+    .menu-toggle {
+      display: none; background: none; border: none;
+      font-size: 26px; color: white; cursor: pointer;
+    }
+    .search-bar {
+      padding: 5px 8px; border-radius: 4px;
+      border: none; outline: none; width: 180px;
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none; flex-direction: column;
+      background-color: #c62828; width: 100%;
+    }
+    .mobile-menu a {
+      padding: 10px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      color: white; text-decoration: none;
+      font-weight: bold; text-align: center;
+    }
+    .mobile-menu a:hover {background-color: #b71c1c;}
+    .mobile-menu input {
+      margin: 10px auto; padding: 5px;
+      width: 80%; border-radius: 4px;
+      border: none; outline: none;
+    }
+
+    /* Carousel */
+    .carousel {
+      position: relative; width: 100%;
+      height: 300px; overflow: hidden;
+    }
+    .slides {display: flex; transition: transform 0.8s ease;}
+    .slides img {
+      width: 100%; height: 300px; object-fit: cover;
+    }
+    .carousel button {
+      position: absolute; top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: white; border: none;
+      padding: 10px 15px; cursor: pointer;
+      border-radius: 50%; font-size: 18px;
+    }
+    .prev {left: 10px;}
+    .next {right: 10px;}
+
+    /* Layout */
+    main {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+    }
+
+    /* News Cards */
+    .news-container {
+      flex: 3;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .news-card {
+      background: white; border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .news-card:hover {transform: translateY(-5px);}
+    .news-card img, .news-card video {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .news-card video {background: black;}
+    .news-card .content {padding: 15px;}
+    .news-card h3 {margin-bottom: 10px; color: #d32f2f;}
+    .news-card p {font-size: 14px; line-height: 1.5;}
+
+    /* Sidebar */
+    aside {flex: 1; margin-left: 20px;}
+    .sidebar-section {
+      background: white; padding: 15px;
+      margin-bottom: 20px; border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .sidebar-section h4 {
+      color: #d32f2f; margin-bottom: 10px;
+      border-bottom: 2px solid #d32f2f;
+      display: inline-block;
+    }
+    .sidebar-section ul {list-style: none; padding: 0;}
+    .sidebar-section li {margin: 10px 0; font-size: 14px;}
+
+    /* Footer */
+    footer {
+      background: #222; color: white;
+      padding: 30px 20px; display: flex;
+      flex-wrap: wrap; justify-content: space-between;
+    }
+    footer div {flex: 1; min-width: 250px; margin: 10px 0;}
+    footer h4 {color: #ff5252; margin-bottom: 10px;}
+    footer ul {list-style: none; padding: 0;}
+    footer li {margin: 5px 0;}
+    footer a {color: #bbb; text-decoration: none;}
+    footer a:hover {color: white;}
+    .social-icons a {
+      margin-right: 10px; font-size: 20px;
+      color: white; text-decoration: none;
+    }
+
+    /* Dark Mode */
+    body.dark {background-color: #121212; color: #eee;}
+    body.dark header {background-color: #222;}
+    body.dark .news-card, body.dark .sidebar-section {background: #1e1e1e; color: #ddd;}
+    body.dark footer {background: #111;}
+    body.dark .mobile-menu {background-color: #333;}
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav {display: none;}
+      .menu-toggle {display: block;}
+      .mobile-menu.show {display: flex;}
+      main {flex-direction: column;}
+      aside {margin-left: 0; margin-top: 20px;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>News 24x7</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">World</a>
+      <a href="#">Politics</a>
+      <a href="#">Sports</a>
+      <a href="#">Contact</a>
+      <input type="text" id="searchInput" class="search-bar" placeholder="Search news...">
+      <button class="toggle-btn" id="themeToggle">🌙</button>
+    </nav>
+    <button class="menu-toggle" id="menuBtn">☰</button>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <input type="text" id="mobileSearch" placeholder="Search news..." />
+    <a href="#">Home</a>
+    <a href="#">World</a>
+    <a href="#">Politics</a>
+    <a href="#">Sports</a>
+    <a href="#">Contact</a>
+    <a href="#" id="mobileTheme">🌙 Toggle Dark</a>
+  </div>
+
+  <!-- Carousel -->
+  <div class="carousel">
+    <div class="slides" id="slides">
+      <img src="https://picsum.photos/1200/300?random=1" alt="Slide 1" />
+      <img src="https://picsum.photos/1200/300?random=2" alt="Slide 2" />
+      <img src="https://picsum.photos/1200/300?random=3" alt="Slide 3" />
+      <img src="https://picsum.photos/1200/300?random=4" alt="Slide 4" />
+      <img src="https://picsum.photos/1200/300?random=5" alt="Slide 5" />
+    </div>
+    <button class="prev" id="prev">❮</button>
+    <button class="next" id="next">❯</button>
+  </div>
+
+  <!-- Body -->
+  <main>
+    <section class="news-container" id="newsContainer">
+      <!-- Video News Card 1 -->
+      <div class="news-card">
+        <video controls poster="https://picsum.photos/600/400?random=16">
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+          Your browser does not support HTML video.
+        </video>
+        <div class="content">
+          <h3>Breaking: Live Political Address</h3>
+          <p>Watch the latest address from the Prime Minister discussing economic growth and reforms.</p>
+        </div>
+      </div>
+
+      <!-- Regular News Card -->
+      <div class="news-card">
+        <img src="https://picsum.photos/600/400?random=7" alt="News 2">
+        <div class="content">
+          <h3>Sports: National Team Secures Victory</h3>
+          <p>The national team clinched a thrilling win last night, marking one of the year’s highlights...</p>
+        </div>
+      </div>
+
+      <!-- Video News Card 2 -->
+      <div class="news-card">
+        <video controls poster="https://picsum.photos/600/400?random=17">
+          <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+          Your browser does not support HTML video.
+        </video>
+        <div class="content">
+          <h3>Technology: Future of AI</h3>
+          <p>Experts showcase the rise of artificial intelligence applications in various sectors.</p>
+        </div>
+      </div>
+
+      <!-- Regular News Card -->
+      <div class="news-card">
+        <img src="https://picsum.photos/600/400?random=9" alt="News 4">
+        <div class="content">
+          <h3>World: Global Summit Highlights Unity</h3>
+          <p>Leaders met to discuss strategies to tackle climate change and other challenges...</p>
+        </div>
+      </div>
+
+      <!-- Regular News Card -->
+      <div class="news-card">
+        <img src="https://picsum.photos/600/400?random=10" alt="News 5">
+        <div class="content">
+          <h3>Entertainment: New Blockbuster Released</h3>
+          <p>The highly anticipated film finally hits theaters, drawing massive crowds...</p>
+        </div>
+      </div>
+    </section>
+
+    <aside>
+      <div class="sidebar-section">
+        <h4>Trending Now</h4>
+        <ul>
+          <li>🔥 Election 2025: Campaigns Heat Up</li>
+          <li>🌍 Global Warming Awareness Week</li>
+          <li>💼 Stock Market Hits Record High</li>
+          <li>🏏 India vs Australia: Final Showdown</li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <h4>Editor's Picks</h4>
+        <ul>
+          <li>Inside Story: Economic Recovery Plans</li>
+          <li>Top 10 Innovations in Tech</li>
+          <li>Spotlight: Rising Stars in Politics</li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div>
+      <h4>Contact Us</h4>
+      <p>Email: info@news24x7.com</p>
+      <p>Phone: +91-9876543210</p>
+      <p>Address: Hyderabad, India</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+        <li><a href="#">Advertise</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Follow Us</h4>
+      <div class="social-icons">
+        <a href="#">🌐</a><a href="#">🐦</a><a href="#">📘</a><a href="#">📸</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle
+    const themeToggle = document.getElementById("themeToggle");
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      themeToggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+    });
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+    menuBtn.addEventListener("click", () => mobileMenu.classList.toggle("show"));
+
+    // Mobile dark mode toggle
+    const mobileTheme = document.getElementById("mobileTheme");
+    mobileTheme.addEventListener("click", () => document.body.classList.toggle("dark"));
+
+    // Carousel logic
+    const slides = document.getElementById("slides");
+    const totalSlides = slides.children.length;
+    let index = 0;
+    document.getElementById("next").addEventListener("click", () => {
+      index = (index + 1) % totalSlides;
+      slides.style.transform = `translateX(-${index * 100}%)`;
+    });
+    document.getElementById("prev").addEventListener("click", () => {
+      index = (index - 1 + totalSlides) % totalSlides;
+      slides.style.transform = `translateX(-${index * 100}%)`;
+    });
+    setInterval(() => {
+      index = (index + 1) % totalSlides;
+      slides.style.transform = `translateX(-${index * 100}%)`;
+    }, 6000);
+
+    // Live Search
+    const searchInput = document.getElementById("searchInput");
+    const mobileSearch = document.getElementById("mobileSearch");
+    const cards = document.querySelectorAll(".news-card");
+
+    function filterNews(term) {
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(term.toLowerCase()) ? "" : "none";
+      });
+    }
+
+    searchInput.addEventListener("input", e => filterNews(e.target.value));
+    mobileSearch.addEventListener("input", e => filterNews(e.target.value));
+  </script>
+</body>
+</html>

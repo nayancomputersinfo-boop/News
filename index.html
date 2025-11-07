@@ -99,19 +99,27 @@
       gap: 20px;
     }
     .news-card {
-      background: white; border-radius: 8px;
+      display: flex;
+      background: white;
+      border-radius: 8px;
       overflow: hidden;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       transition: transform 0.3s ease;
     }
     .news-card:hover {transform: translateY(-5px);}
     .news-card img, .news-card video {
-      width: 100%;
-      height: 200px;
+      width: 50%;
+      height: 250px;
       object-fit: cover;
     }
     .news-card video {background: black;}
-    .news-card .content {padding: 15px;}
+    .news-card .content {
+      width: 50%;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
     .news-card h3 {margin-bottom: 10px; color: #d32f2f;}
     .news-card p {font-size: 14px; line-height: 1.5;}
 
@@ -161,25 +169,33 @@
       .mobile-menu.show {display: flex;}
       main {flex-direction: column;}
       aside {margin-left: 0; margin-top: 20px;}
+      .news-card {flex-direction: column;}
+      .news-card img, .news-card video, .news-card .content {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
 
   <!-- Header -->
-  <header>
-    <h1>News 24x7</h1>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">World</a>
-      <a href="#">Politics</a>
-      <a href="#">Sports</a>
-      <a href="#">Contact</a>
-      <input type="text" id="searchInput" class="search-bar" placeholder="Search news...">
-      <button class="toggle-btn" id="themeToggle">🌙</button>
-    </nav>
-    <button class="menu-toggle" id="menuBtn">☰</button>
-  </header>
+<header>
+  <div style="display:flex; align-items:center; gap:10px;">
+    <img src="images/logo.jpg" alt="B News Telugu Logo" style="height:50px; border-radius:50%;">
+    <h1 style="font-weight:bold;">B News Telugu</h1>
+  </div>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">World</a>
+    <a href="#">Politics</a>
+    <a href="#">Sports</a>
+    <a href="#">Contact</a>
+    <input type="text" id="searchInput" class="search-bar" placeholder="Search news...">
+    <button class="toggle-btn" id="themeToggle">🌙</button>
+  </nav>
+  <button class="menu-toggle" id="menuBtn">☰</button>
+</header>
+
 
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
@@ -195,11 +211,9 @@
   <!-- Carousel -->
   <div class="carousel">
     <div class="slides" id="slides">
-      <img src="https://picsum.photos/1200/300?random=1" alt="Slide 1" />
-      <img src="https://picsum.photos/1200/300?random=2" alt="Slide 2" />
-      <img src="https://picsum.photos/1200/300?random=3" alt="Slide 3" />
-      <img src="https://picsum.photos/1200/300?random=4" alt="Slide 4" />
-      <img src="https://picsum.photos/1200/300?random=5" alt="Slide 5" />
+      <img src="images/banner1.jpg" alt="Slide 1" />
+      <img src="images/banner2.jpg" alt="Slide 2" />
+      <img src="images/banner3.jpg" alt="Slide 3" />
     </div>
     <button class="prev" id="prev">❮</button>
     <button class="next" id="next">❯</button>
@@ -208,54 +222,45 @@
   <!-- Body -->
   <main>
     <section class="news-container" id="newsContainer">
-      <!-- Video News Card 1 -->
       <div class="news-card">
-        <video controls poster="https://picsum.photos/600/400?random=16">
+        <iframe width="695" height="391" src="https://www.youtube.com/embed/h0Fhf_ukVQg" title="పోరుమామిళ్లలో విద్యార్థుల కోసం వాటర్ ప్యూరిఫైయర్‌ల వితరణ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-          Your browser does not support HTML video.
         </video>
         <div class="content">
-          <h3>Breaking: Live Political Address</h3>
+          <h3>PORUMAMILLA NEWS: పోరుమామిళ్లలో విద్యార్థుల కోసం వాటర్ ప్యూరిఫైయర్</h3>
           <p>Watch the latest address from the Prime Minister discussing economic growth and reforms.</p>
         </div>
       </div>
 
-      <!-- Regular News Card -->
       <div class="news-card">
-        <img src="https://picsum.photos/600/400?random=7" alt="News 2">
+        <iframe width="695" height="391" src="https://www.youtube.com/embed/cpU3CePW4DY" title="టీడీపీ ని 100%  2029 లో సాగనంపేది ఈ నలుగురేనా ?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         <div class="content">
-          <h3>Sports: National Team Secures Victory</h3>
+          <h3>ANDHRA PRADESH NEWS: టీడీపీ ని 100%  2029 లో సాగనంపేది ఈ నలుగురేనా ?</h3>
           <p>The national team clinched a thrilling win last night, marking one of the year’s highlights...</p>
         </div>
       </div>
 
-      <!-- Video News Card 2 -->
       <div class="news-card">
-        <video controls poster="https://picsum.photos/600/400?random=17">
-          <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
-          Your browser does not support HTML video.
-        </video>
+        <iframe width="695" height="391" src="https://www.youtube.com/embed/3bosvZxZb0o" title="ISRO&#39;s Bahubali Rocket Launch Becomes Successful | CMS 3 Satelite || TV5 News" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         <div class="content">
-          <h3>Technology: Future of AI</h3>
+          <h3>Technology: ISRO&#39;s Bahubali Rocket Launch Becomes Successful | CMS 3 Satelite</h3>
           <p>Experts showcase the rise of artificial intelligence applications in various sectors.</p>
         </div>
       </div>
 
-      <!-- Regular News Card -->
       <div class="news-card">
-        <img src="https://picsum.photos/600/400?random=9" alt="News 4">
+        <iframe width="695" height="391" src="https://www.youtube.com/embed/RS1eMDD97-E?list=PL4aEDTsdnov9xVRgbYQMv-7CNkHoEVkCq" title="కలియుగ దైవం వీర బ్రహ్మేంద్ర స్వామిని దర్శించుకొన్న RDO వెంకట రమణ." frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         <div class="content">
-          <h3>World: Global Summit Highlights Unity</h3>
-          <p>Leaders met to discuss strategies to tackle climate change and other challenges...</p>
+          <h3>PORUMAMILLA NEWS: కలియుగ దైవం వీర బ్రహ్మేంద్ర స్వామిని దర్శించుకొన్న RDO వెంకట రమణ.</h3>
+          <p>Leaders met to discuss strategies to tackle climate change and other global challenges.</p>
         </div>
       </div>
 
-      <!-- Regular News Card -->
       <div class="news-card">
-        <img src="https://picsum.photos/600/400?random=10" alt="News 5">
+        <iframe width="695" height="391" src="https://www.youtube.com/embed/gZAp5B5vjt4?list=PL4aEDTsdnov9xVRgbYQMv-7CNkHoEVkCq" title="మహా శివరాత్రి సందర్భంగా మైదుకూరు సహాయ సేవాసంస్థ,బాలమ్మ సత్రంలో అన్నదానం కార్యక్రమం ఏర్పాటు." frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         <div class="content">
-          <h3>Entertainment: New Blockbuster Released</h3>
-          <p>The highly anticipated film finally hits theaters, drawing massive crowds...</p>
+          <h3>MYDUKUR NEWS: మహా శివరాత్రి సందర్భంగా మైదుకూరు సహాయ సేవాసంస్థ,బాలమ్మ సత్రంలో అన్నదానం కార్యక్రమం ఏర్పాటు.</h3>
+          <p>The highly anticipated film finally hits theaters, drawing massive crowds across the globe.</p>
         </div>
       </div>
     </section>
@@ -285,9 +290,9 @@
   <footer>
     <div>
       <h4>Contact Us</h4>
-      <p>Email: info@news24x7.com</p>
+      <p>Email: info@bnewstelugu.com</p>
       <p>Phone: +91-9876543210</p>
-      <p>Address: Hyderabad, India</p>
+      <p>Address: Porumamilla, Andhra Pradesh, India</p>
     </div>
     <div>
       <h4>Quick Links</h4>
@@ -301,29 +306,36 @@
     <div>
       <h4>Follow Us</h4>
       <div class="social-icons">
-        <a href="#">🌐</a><a href="#">🐦</a><a href="#">📘</a><a href="#">📸</a>
+        <a href="https://www.youtube.com/@BTeluguNews"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
+  <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"/>
+</svg>
+        </a><a href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+  <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+</svg>
+
       </div>
     </div>
   </footer>
 
   <script>
-    // Theme toggle
+    // Dark Mode
     const themeToggle = document.getElementById("themeToggle");
     themeToggle.addEventListener("click", () => {
       document.body.classList.toggle("dark");
       themeToggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
     });
 
-    // Mobile menu toggle
+    // Mobile Menu
     const menuBtn = document.getElementById("menuBtn");
     const mobileMenu = document.getElementById("mobileMenu");
     menuBtn.addEventListener("click", () => mobileMenu.classList.toggle("show"));
 
-    // Mobile dark mode toggle
+    // Mobile Dark Mode
     const mobileTheme = document.getElementById("mobileTheme");
     mobileTheme.addEventListener("click", () => document.body.classList.toggle("dark"));
 
-    // Carousel logic
+    // Carousel
     const slides = document.getElementById("slides");
     const totalSlides = slides.children.length;
     let index = 0;
